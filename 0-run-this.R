@@ -1,10 +1,13 @@
 rm(list = ls())
 gc()
-path = "C:\\Users\\ka294056\\Desktop\\IncrementalLearning"
+path = "YOUR-PATH-FOR-ALL-THE-R-FILES"
 setwd(path)
 
-
-library(PythonInR)
+if("PythonInR" %in% rownames(installed.packages()) == FALSE) {
+	install.packages("PythonInR", repos = "http://cran.us.r-project.org/")
+} else {
+	library(PythonInR)
+}
 pyConnect()
 pyExecfile("clean-all.py")
 pyExit()
@@ -15,7 +18,7 @@ setwd(path)
 source("2-initial-run.R")
 # # # REPEAT THE BELOW STEPS # # #
 # # prepare - new unseen test set and make the old test set as feedback set
-nIters = 5 #35
+nIters = 35
 for(run in 1:nIters){
 	setwd(path)
 	source("3-data-preparation.R")
